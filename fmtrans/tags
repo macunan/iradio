@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/iradio/raspberrypi_fmradio/fmtrans/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210110.0/
+Config	models.py	/^class Config(models.Model):$/;"	c
+FmtransConfig	apps.py	/^class FmtransConfig(AppConfig):$/;"	c
+Meta	models.py	/^    class Meta:$/;"	c	class:Config
+Meta	models.py	/^    class Meta:$/;"	c	class:Radios
+Radios	models.py	/^class Radios(models.Model):$/;"	c
+Test page	templates/radio.html	/^<h1>Test page<\/h1>$/;"	h
+db_table	models.py	/^        db_table = 'config'$/;"	v	class:Config.Meta
+db_table	models.py	/^        db_table = 'radios'$/;"	v	class:Radios.Meta
+default_auto_field	apps.py	/^    default_auto_field = 'django.db.models.BigAutoField'$/;"	v	class:FmtransConfig
+end	models.py	/^    end = models.TextField(blank=True, null=True)$/;"	v	class:Config
+id	models.py	/^    id = models.AutoField(primary_key=True)$/;"	v	class:Radios
+index	views.py	/^def index(request):$/;"	f
+managed	models.py	/^        managed = False$/;"	v	class:Config.Meta
+managed	models.py	/^        managed = False$/;"	v	class:Radios.Meta
+name	apps.py	/^    name = 'fmtrans'$/;"	v	class:FmtransConfig
+name	models.py	/^    name = models.TextField(blank=True, null=True)$/;"	v	class:Radios
+start	models.py	/^    start = models.TextField(blank=True, null=True)$/;"	v	class:Config
+state	models.py	/^    state = models.TextField(blank=True, null=True)$/;"	v	class:Radios
+url	models.py	/^    url = models.TextField(blank=True, null=True)$/;"	v	class:Radios
+urlpatterns	urls.py	/^urlpatterns= [$/;"	v

@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+
+<html><head>
+<title>Mauri Book Cloud</title>
+{% load static %} 
+<script src="{%static 'jquery-3.6.0.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{%static '/bootstrap-3.3.7-dist/css/bootstrap.css'%}"/>
+<script src="{%static '/bootstrap-3.3.7-dist/js/bootstrap.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{%static 'switch.css'%}"/>
+</head>
+
+<body>
+<h1>Mauri Book Cloud</h1>
+
+
+<!-- <a href="{%static '/books/tarea1.png'%}">{%static '/books/tarea1.png'%}</a> -->
+
+
+{%for file in files %}
+<br>
+
+
+<a href='{{file}}'>{{file}}</a>
+{% endfor %}
+
+
+
+</body>
+</html>

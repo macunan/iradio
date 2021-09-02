@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head>
+
+<title>Internet Radio FM Transmitter</title>
+{% load static %} 
+<script src="{%static 'jquery-3.6.0.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{%static 'tailwind.min.css'%}"/>
+<link rel="stylesheet" type="text/css" href="{%static 'switch.css'%}"/>
+	</head>
+
+	<body class="align-items: stretch;">
+
+<style>
+
+    body{background:white!important;}
+
+</style>
+
+{% include "menu.html" %}
+
+
+<p class="text-lg text-center font-bold m-5" align="center">Internet Radio FM Transmitter</p>
+<table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800" align="center">
+<th class="w-1/2" >Radio Name</th><th class="w-1/2" >Status</th>
+{%for radio in radios %}
+<tr class="bg-gray-100 border-b border-gray-200"><td class="px-4 py-3" align="center">{{ radio.name}}</td> <td class="px-4 py-3"  align="center">{{radio.state}}<br> 									     
+<form action="" method="post">
+{% csrf_token %}
+{%if radio.state == "ON" %} 
+<label class="switch"><input type="checkbox" name="radio_reset" checked onChange='submit()'>
+<span class="slider round"></span></label>
+{% else %}
+<label class="switch"><input type="checkbox" name="id" value={{radio.id}} onChange='submit()' >
+<span class="slider round"></span></label>
+ {% endif %}
+</td>
+</form>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>

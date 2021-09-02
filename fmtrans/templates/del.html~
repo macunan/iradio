@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html><head>
+<title>Internet Radio FM Transmitter</title>
+{% load static %} 
+<script src="{%static 'jquery-3.6.0.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{%static '/bootstrap-3.3.7-dist/css/bootstrap.css'%}"/>
+<script src="{%static '/bootstrap-3.3.7-dist/js/bootstrap.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{%static 'switch.css'%}"/>
+</head>
+
+	<body>
+<h1>Internet Radio FM Transmitter</h1>
+<table class="table table-dark">
+<th>Radio Name</th><th>Status</th>
+{%for radio in radios %}
+<tr><td>{{ radio.name}}</td> <td>{{radio.state}}<br> 									     
+<form action="" method="post">
+{% csrf_token %}
+{%if radio.state == "ON" %} 
+<label class="switch"><input type="checkbox" name="radio_reset" checked onChange='submit()'>
+<span class="slider round"></span></label>
+{% else %}
+<label class="switch"><input type="checkbox" name="id" value={{radio.id}} onChange='submit()' >
+<span class="slider round"></span></label>
+ {% endif %}
+</td>
+</form>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>

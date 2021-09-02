@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html><head>
+<title>House Lights</title>
+{% load static %} 
+<script src="{%static 'jquery-3.6.0.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{%static '/bootstrap-3.3.7-dist/css/bootstrap.css'%}"/>
+<script src="{%static '/bootstrap-3.3.7-dist/js/bootstrap.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{%static 'switch.css'%}"/>
+</head>
+
+	<body>
+<h1>House Lights</h1>
+<table class="table table-dark">
+<th>Room Name</th><th>Toggle</th>
+<tr><td>mauri Room</td> <td> 									     
+<form action="" method="post">
+{% csrf_token %}
+<label class="switch"><input type="checkbox" name="id" value=1 onChange='submit()' >
+<span class="slider round"></span></label>
+</td>
+</form>
+</tr>
+
+<tr><td>Dad</td> <td><br> 									     
+<form action="" method="post">
+{% csrf_token %}
+<label class="switch"><input type="checkbox" name="id" value=2 onChange='submit()' >
+<span class="slider round"></span></label>
+</td>
+</form>
+</tr>
+<tr><td>Afuera</td> <td><br> 									     
+<form action="" method="post">
+{% csrf_token %}
+<label class="switch"><input type="checkbox" name="id" value=3 onChange='submit()' >
+<span class="slider round"></span></label>
+</td>
+</form>
+</tr>
+</table>
+</body>
+</html>
