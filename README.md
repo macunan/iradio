@@ -1,6 +1,6 @@
 ## _Raspberry Pi FM Radio Transmitter_
 
-![Alt Text](https://github.com/macunan/iradio/iradio.gif)
+![Alt Text](https://github.com/macunan/iradio/blob/main/iradio.gif)
 
 
 Iradio is browser based controller to transmitt FM radio from your Rasberry pi uses Django as front end and python together with the awesome RM Radio transmitter by Christophe Jaquet and Arch Linux Arm Branch https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
