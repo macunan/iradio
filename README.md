@@ -3,16 +3,17 @@
 ![Alt Text](https://github.com/macunan/iradio/blob/main/iradio.gif)
 
 
-Iradio is browser based controller to transmitt FM radio from your Rasberry pi uses Django as front end and python together with the awesome RM Radio transmitter  by Christophe Jaquet and Arch Linux Arm Branch 
--https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
- 
--https://github.com/ChristopheJacquet/PiFmRds
+- Iradio is browser based controller to transmitt FM radio from your Rasberry pi uses Django as front end and python together with the awesome RM Radio transmitter  by Christophe Jaquet and Arch Linux Arm Branch 
 
-Note You can transmit local mp3 files or remote url streams of your favorite internet radios stations.
+- https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
+ 
+- https://github.com/ChristopheJacquet/PiFmRds
+
+- Note You can transmit local mp3 files or remote url streams of your favorite internet radios stations.
 
 ## Requirements
--Linux Instalation running on Raspbery pi 3 board.
--Small connector cable for GPIO 4 (pin 7 on header P1).
+- Linux Instalation running on Raspbery pi 3 board.
+- Small connector cable for GPIO 4 (pin 7 on header P1).
 - A bit of time and effort.
 - Good power supply for your raspberry pi.
 - Fm Receiver so you can listen to your internet radio on or mp3s.
