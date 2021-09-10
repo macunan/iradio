@@ -1,4 +1,4 @@
-## _Raspberry Pi FM Radio Transmitter_
+# _Raspberry Pi FM Radio Transmitter_
 
 ![Alt Text](https://github.com/macunan/iradio/blob/main/iradio.gif)
 
@@ -11,7 +11,7 @@
 
 - Note You can transmit local mp3 files or remote url streams of your favorite internet radios stations.
 
-## Requirements
+# Requirements
 - Linux Instalation running on Raspbery pi 3b+ board.
 - Small connector cable for GPIO 4 (pin 7 on header P1).
 - A bit of time and effort.
@@ -20,7 +20,7 @@
 - Computer or phone/tablet to follow all steps.
 - ssh access your raspberry pi and root like user to execute backend commands
 - Be careful with your country/state regulations regarding FM  transmissions is your responsibility to follow them and comply with local laws and regulations in your region.
-## Installation
+# Installation
 
 1-  I used Arch linux arm for my installation but I believe it can be any Linux as long as you have a recent kernel in my case 5.10.60-1-ARCH #1 SMP Sat Aug 21 14:56:38 UTC 2021 armv7l GNU/Linux it should be fine. Note only recent Kernel will function without issues, older kernel might work but you might face some issues.
 
@@ -191,19 +191,19 @@ Also don't forget to install uwsgi  like  pacman -S uwsgi also make sure port 80
 
 
 
-## Usage
+# Usage
 
 Functions can be accessed via the black menu on top, designed for latest browswers, older browsers will still see some sort of menu but not as nice.
-# Play
+## Play
 To play selected radios.
-# Add 
+## Add 
 To add a file playlist or internet radio url, note should be mp3 type.
 
-# Modify
+## Modify
 To modify existing radio station.
-# Delete
+## Delete
 To delete existing radio station.
-# Change Config
+## Change Config
 To change setting like homedirectory and transmitting frecuency.
 
 
