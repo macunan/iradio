@@ -16,6 +16,7 @@ urlpatterns= [
         path('del',views.borrar),
         path('modify',views.modify),
         path('ajax/', ajax_view, name="ajax"),
+        path('config', views.config),
         ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

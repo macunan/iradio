@@ -9,8 +9,9 @@ from django.db import models
 
 
 class Config(models.Model):
-    start = models.TextField(blank=True, null=True)
-    end = models.TextField(blank=True, null=True)
+    frecuency = models.TextField(blank=True, null=True)
+    id = models.AutoField(primary_key=True)
+    homelocation = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = True

@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from .models import Radios
+from .models import Radios,Config
 from .pyfunctions import Server_Ops
 import os
 from django.http import JsonResponse
-from .forms import RadioForm
+from .forms import ConfigForm, RadioForm
 def index(request):
     if request.method == "POST":
         if len(request.POST) == 1:
@@ -79,6 +79,13 @@ def modify(request):
         context={'radios':radios}
         return render(request,'modify.html',context)
 
+
+
+
+
+
+
+
 def ajax_view(request):
    if request.method == "POST":
         print(request.POST)
@@ -90,3 +97,27 @@ def ajax_view(request):
             "url":radio.url
         }
         return JsonResponse(data)
+
+
+
+def config(request):
+    if request.method == 'POST':
+        form=ConfigForm(request.POST)
+        if form.is_valid():
+         form.save()
+         config = Config.objects.latest('id')
+         filterid=config.id
+         Config.objects.exclude(id=filterid).delete()
+         server_op=Server_Ops()
+         if  Radios.objects.filter(state="ON").count() > 0:
+          on_radio_id=Radios.objects.get(state="ON").id
+          server_op.writefile(on_radio_id)
+          server_op.restart()
+         context={'change':True ,'form':form}
+         return render(request,'config.html',context)
+
+    else:
+       config = Config.objects.latest('id')
+       form=ConfigForm(instance=config)   
+    context={'form':form}
+    return render(request,'config.html',context)

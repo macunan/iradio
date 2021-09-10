@@ -8,13 +8,20 @@ class Server_Ops:
        os.system("systemctl restart iradio")
     def writefile(self,id):
        id=int(id)
+
+       config = Config.objects.latest('id')
        url=Radios.objects.get(id=id).url
+       freq=config.frecuency
+       home_loc=config.homelocation
+       radio_name=Radios.objects.get(id=id).name
+       if len(radio_name)>64:
+        radio_name=radio_name[0:64]
        start="sox -t mp3 "
-       end=" -t wav - |pi_fm_rds -freq  91.5.0 -audio -"
+       end=" -t wav - |pi_fm_rds -freq "+freq+ "   -rt '"+radio_name+"' -audio -"
 # end=" -r 22050 -c 1 -b 16 -t wav - |fm_transmitter -f  91.0 -"
        init="#!/bin/bash"
        script=start+url+end
-       file = open(r"/home/iradio/radio.sh", "w") 
+       file = open(home_loc+"radio.sh", "w") 
        file.write(init+"\n")
        file.write(script)
        file.close()
