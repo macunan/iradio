@@ -12,12 +12,12 @@
 - Note You can transmit local mp3 files or remote url streams of your favorite internet radios stations.
 
 ## Requirements
-- Linux Instalation running on Raspbery pi 3 board.
+- Linux Instalation running on Raspbery pi 3b+ board.
 - Small connector cable for GPIO 4 (pin 7 on header P1).
 - A bit of time and effort.
 - Good power supply for your raspberry pi.
-- Fm Receiver so you can listen to your internet radio on or mp3s.
-- Computer or phone to follow all steps.
+- Fm Receiver so you can listen to your internet radio  or mp3s.
+- Computer or phone/tablet to follow all steps.
 - ssh access your raspberry pi and root like user to execute backend commands
 - Be careful with your country/state regulations regarding FM  transmissions is your responsibility to follow them and comply with local laws and regulations in your region.
 ## Installation
@@ -51,7 +51,7 @@ Once compiled copy to your systems's bin directory in my case for Arch Linux:
 ```sh
 /usr/local/bin
 [root@mauripi bin]# ls -lhtr 
-
+cp pi_fm_rds /usr/local/bin
 -rwxr-xr-x 1 root root  82K ago 26 18:56 pi_fm_rds
 
 
@@ -125,18 +125,8 @@ looks like the following:
 sox -t mp3 https://api.spreaker.com/listen/user/kgra/episode/latest/shoutcast.mp3 -t wav - |pi_fm_rds -freq  91.5.0 -audio -
  ```
 
-You might need to edit line 17 of 
-https://github.com/macunan/iradio/blob/main/fmtrans/pyfunctions.py
-```sh
-  file = open(r"/home/iradio/radio.sh", "w") 
-```
-and add the proper location  radio.sh  because the class will create a new radio.sh every time the radio is activated via the frontend, afterwards systemctl start iradio.service is executed.
-Also you might need to modify line 13 of pyfunctions and change the correct frecuency -freq
-by default is 91.5 but that might need to change in you local case. Also you can create a iradio like user with root user like shown above.
-
-```sh
-  end=" -t wav - |pi_fm_rds -freq  91.5.0 -audio -"
-```
+Note you can configure location in config section in the menu and also the transmitting frecuency.
+Note homelocation referes of where radio.sh will be located. Systemd is used to start and stop the radio transmission.
 
 
 
@@ -165,3 +155,36 @@ Starting development server at http://0.0.0.0:80/
 Quit the server with CONTROL-C.
 ```
 Note the latter will last until the raspberry pi is powered down or rebooted, so you will need to start tmux and type the command everytime. You can also create a bash or python script to execute automatically at start up or create systemd service.
+
+
+8- Update you can also use systemd to enable interface
+
+ I created file: like cat /etc/systemd/system/django.service
+Added the following
+
+```sh
+Unit
+[Unit]
+Description=django_port_8000
+[Service]
+ExecStart=/home/iradio/django.sh
+PIDFile=/var/run/django_server.pid
+Restart=always
+RestartSec=30
+[Install]
+WantedBy=multi-user.target
+[root@mauripi ~]# 
+```
+
+django.sh contains:
+
+```sh
+
+#!/bin/bash
+uwsgi /srv/http/uwsgi.ini
+
+```
+
+
+Note uwsgi.ini already included in repository might need to change locations ins uwsgi corresponding to your installation.
+Also don't forget to install uwsgi  like  pacman -S uwsgi also make sure port 80 is free on your raspberry pi.
