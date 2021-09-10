@@ -188,3 +188,23 @@ uwsgi /srv/http/uwsgi.ini
 
 Note uwsgi.ini already included in repository might need to change locations ins uwsgi corresponding to your installation.
 Also don't forget to install uwsgi  like  pacman -S uwsgi also make sure port 80 is free on your raspberry pi.
+
+
+
+## Usage
+
+Functions can be accessed via the black menu on top, designed for latest browswers, older browsers will still see some sort of menu but not as nice.
+# Play
+To play selected radios.
+# Add 
+To add a file playlist or internet radio url, note should be mp3 type.
+
+# Modify
+To modify existing radio station.
+# Delete
+To delete existing radio station.
+# Change Config
+To change setting like homedirectory and transmitting frecuency.
+
+
+
