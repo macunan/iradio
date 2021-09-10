@@ -159,7 +159,7 @@ Note the latter will last until the raspberry pi is powered down or rebooted, so
 
 8- Update you can also use systemd to enable interface
 
- I created file: like cat /etc/systemd/system/django.service
+ I created file: like in the following location: /etc/systemd/system/django.service
 Added the following
 
 ```sh
@@ -173,7 +173,6 @@ Restart=always
 RestartSec=30
 [Install]
 WantedBy=multi-user.target
-[root@mauripi ~]# 
 ```
 
 django.sh contains:
