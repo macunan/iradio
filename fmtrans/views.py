@@ -6,6 +6,7 @@ import os
 from django.http import JsonResponse
 from .forms import ConfigForm, RadioForm
 def index(request):
+    transmit_status=False
     if request.method == "POST":
         if len(request.POST) == 1:
          ops=Server_Ops()
@@ -16,11 +17,13 @@ def index(request):
             ops.writefile(request.POST["id"])
             Radios.objects.filter(state='ON').update(state='OFF')
             Radios.objects.filter(id=int(request.POST["id"])).update(state='ON')
+            transmit_status=True
             ops.restart()
 
 # on_radio_id=Radios.objects.get(state="ON").id
     radios=Radios.objects.all().order_by('-state')
-    context={'radios':radios}
+    frecuency = Config.objects.latest('id').frecuency
+    context={'radios':radios,'frecuency':frecuency,'trans_status':transmit_status}
     return render(request,'radio.html',context)
 
 

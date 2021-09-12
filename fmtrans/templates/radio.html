@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html><head>
 
-<title>Internet Radio FM Transmitter</title>
 {% load static %} 
 <script src="{%static 'jquery-3.6.0.js'%}"></script>
 <link rel="stylesheet" type="text/css" href="{%static 'tailwind.min.css'%}"/>
 <link rel="stylesheet" type="text/css" href="{%static 'switch.css'%}"/>
+<title>Internet Radio FM Transmitter</title>
 	</head>
 
 	<body class="align-items: stretch;">
@@ -19,7 +19,15 @@
 {% include "menu.html" %}
 
 
-<p class="text-lg text-center font-bold m-5" align="center">Internet Radio FM Transmitter</p>
+<p class="text-lg text-center font-bold m-5" align="center">Internet Radio FM Transmitter 
+
+{%if trans_status == True %} 
+Currently Transmitting on {{frecuency}} MHZ FM
+{% endif %}
+
+
+
+</p>
 <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800" align="center">
 <th class="w-1/2" >Radio Name</th><th class="w-1/2" >Status</th>
 {%for radio in radios %}
