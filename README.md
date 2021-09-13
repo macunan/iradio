@@ -204,6 +204,7 @@ To modify existing radio station.
 To delete existing radio station.
 ## Change Config
 To change setting like homedirectory and transmitting frecuency.
-
+## Export to csv
+Added hability to export radio list to csv format so it can be used elsewhere like pyradio which I use a lot to listen to radios online.
 
 
