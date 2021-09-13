@@ -25,7 +25,6 @@ class Server_Ops:
        file.write(init+"\n")
        file.write(script)
        file.close()
-       print(script)
     def run_fast_scandir(self,dir):    # dir: str, ext: list
         s="";
         i=0
@@ -39,4 +38,16 @@ class Server_Ops:
 
 
         return(files)
+
+
+    def export_stations(self):
+       config = Config.objects.latest('id')
+       home_loc=config.homelocation
+       radios=Radios.objects.all()
+       file = open(home_loc+"stations.csv", "w") 
+       for radio in radios :
+        print(radio.name)
+        print(radio.url)
+        file.write(radio.name+","+radio.url+"\n")
+       file.close()
 

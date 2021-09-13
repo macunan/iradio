@@ -83,6 +83,13 @@ def modify(request):
         return render(request,'modify.html',context)
 
 
+def export(request):
+            
+            ops=Server_Ops()
+            config = Config.objects.latest('id')
+            ops.export_stations()
+            context={'change':True,'home':config.homelocation}
+            return render(request,'export.html',context)
 
 
 
