@@ -86,7 +86,16 @@ pacman -S python python-pip tmux
 -Install Django
 ```sh
 pip install django
+
+
 ```
+Install django-ninja for backend api can be used with frontend frameworks instead of django templetes.
+
+```sh
+pip install django-ninja
+
+```
+
 
 5- Install and configure Django source code
 -In a directory that you have webserver access:
@@ -205,6 +214,20 @@ To delete existing radio station.
 ## Change Config
 To change setting like homedirectory and transmitting frecuency.
 ## Export to csv
-Added hability to export radio list to csv format so it can be used elsewhere like pyradio which I use a lot to listen to radios online.
+Added hability to export radio list to csv format so it can be used elsewhere like pyradio which I use a lot to listen to radios online also hability to download from site.
 
 
+## Added api so you can interface with frontend frameworks and others
+To check more details on the apis like parameters you can check api documentation on the server itself:
+
+```sh
+
+<hostname>/api/docs
+
+In my case:
+http://192.168.31.232/api/docs
+
+
+```
+
+![Alt Text](https://github.com/macunan/iradio/blob/main/api_docs.png)
