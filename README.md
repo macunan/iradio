@@ -89,7 +89,7 @@ pip install django
 
 
 ```
-Install django-ninja for backend api can be used with frontend frameworks instead of django templetes.
+Install django-ninja for backend api can be used with frontend frameworks instead of django templates.
 
 ```sh
 pip install django-ninja
