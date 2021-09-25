@@ -5,6 +5,16 @@ from .pyfunctions import Server_Ops
 import os
 from django.http import JsonResponse
 from .forms import ConfigForm, RadioForm
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+# Import mimetypes module
+import mimetypes
+# import os module
+# Import HttpResponse module
+from django.http.response import HttpResponse
+
+
+
 def index(request):
     transmit_status=False
     if request.method == "POST":
@@ -83,14 +93,6 @@ def modify(request):
         return render(request,'modify.html',context)
 
 
-def export(request):
-            
-            ops=Server_Ops()
-            config = Config.objects.latest('id')
-            ops.export_stations()
-            context={'change':True,'home':config.homelocation}
-            return render(request,'export.html',context)
-
 
 
 
@@ -131,3 +133,34 @@ def config(request):
        form=ConfigForm(instance=config)   
     context={'form':form}
     return render(request,'config.html',context)
+
+
+
+def download_file(request):
+    config = Config.objects.latest('id')
+    context={'change':True,'home':config.homelocation}
+    # Define text file name
+    filename = 'stations.csv'
+    # Define the full file path
+    filepath = config.homelocation+filename
+    # Open the file for reading content
+    path = open(filepath, 'r')
+    # Set the mime type
+    mime_type, _ = mimetypes.guess_type(filepath)
+    # Set the return value of the HttpResponse
+    response = HttpResponse(path, content_type=mime_type)
+    # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # Return the response value
+    return response
+
+
+
+def export(request):
+            
+            ops=Server_Ops()
+            config = Config.objects.latest('id')
+            ops.export_stations()
+            context={'change':True,'home':config.homelocation}
+            return render(request,'export.html',context)
+

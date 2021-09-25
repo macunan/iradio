@@ -20,11 +20,16 @@ from django.urls import path, include
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 dajaxice_autodiscover()
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib import admin
+from django.urls import path
 
 
 urlpatterns = [
     path('', include('fmtrans.urls')),
     path('admin/', admin.site.urls),
+    path("api/", api.urls),
      url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
-]
+
+
+     ]
 urlpatterns += staticfiles_urlpatterns()
