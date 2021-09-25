@@ -231,3 +231,6 @@ http://192.168.31.232/api/docs
 ```
 
 ![Alt Text](https://github.com/macunan/iradio/blob/main/api_docs.png)
+
+## Also please support Django Ninja frameworks is awesome !
+https://django-ninja.rest-framework.com
