@@ -1,36 +1,64 @@
 <!DOCTYPE html>
-
 <html><head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="Delete Internet Radio"
+      content="Delete Internet Radio"
+    />
+    <meta name="robots" content="index,follow" />
+
+
+
+
 <title>Delete Internet Radios</title>
 {% load static %} 
 <script src="{%static 'jquery-3.6.0.js'%}"></script>
 <link rel="stylesheet" type="text/css" href="{%static 'switch.css'%}"/>
-<link rel="stylesheet" type="text/css" href="{%static 'tailwind.min.css'%}"/>
+<link rel="stylesheet" type="text/css" href="{%static 'style.css'%}"/>
+
+
+<style>
+    
+
+#delli{
+background-color: white;
+}
+
+
+#dela{
+color:black;
+text-decoration: none;
+align-items: center;
+}
+
+
+</style>
+
+
+</head>
 
 	<body>
 
 
 
-<style>
-
-    body{background:white!important;}
-
-</style>
 {% include "menu.html" %}
 
-
-<p class="text-lg text-center font-bold m-5" align="center">Delete Internet Radio</p>
-
-<table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800" align="center">
-<th class="w-1/2" >Radio Name</th><th class="w-1/2" >Status</th>
+<h1>Delete Internet Radio</h1>
+<table>
+<th>Radio Name</th><th>Slide Switch to Delete</th>
 {%for radio in radios %}
-<tr  class="bg-gray-100 border-b border-gray-200"><td class="px-4 py-3" align="center">{{ radio.name}}</td> <td class="px-4 py-3" align="center">Slide Switch To Delete<br> 									     
+<tr><td>{{ radio.name}}</td> 
+	<td>
+		DEL
+		<br>
 <form action="" method="post">
 {% csrf_token %}
 <label class="switch"><input type="checkbox" name="id" value={{radio.id}} onChange='submit()' >
 <span class="slider round"></span></label>
-</td>
 </form>
+</td>
 </tr>
 {% endfor %}
 </table>

@@ -8,28 +8,12 @@ html {
   font-size: 62.5%;
 }
 
-body {
-  height: 100%;
-  width:100%;
-}
-div{
-width: 100%;
-min-height: 80vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-/* background: linear-gradient(rgba(0, 0, 0, 0.5), transparent), */
-/* url("lights.jpg"); */
-background-repeat: no-repeat;
-background-position: center;
-background-size:cover;
-}
 
 table {
-width: 80%;
+width: 90%;
 text-align: center;
 font-size:2.8rem;
+margin:auto;
 }
 
 
@@ -42,15 +26,454 @@ th {
 
 
 h1 {
-width: 80%;
+width: 90%;
 text-align: center;
 font-size: 3rem;
 background-color:lightgray;
+margin:auto;
 }
 
+
+h2 {
+width: 90%;
+text-align: center;
+font-size: 1.8rem;
+margin:auto;
+}
+
+
+img {
+width: 2rem;	
+height: 2rem;
+}
+
+
+nav {
+display:flex;
+background-color: black;
+min-height: 5vh;
+width:90%;
+margin:auto;
+align-items: center;
+justify-items: center;
+padding:2rem;
+}
+
+nav ul {
+display: flex;
+flex: 1 1 1rem;
+list-style: none;
+align-items:center;
+justify-content:space-evenly;
+}
+
+nav ul li{
+ font-size:2rem;
+}
+li:hover{
+background-color: white;
+}
+
+
+a:hover{
+color:black;
+text-decoration: none;
+align-items: center;
+}
+
+a {
+color:white;
+text-decoration: none;
+align-items: center;
+}
+
+
+/*kittparent,matrix both used for playradio page when you see kit bar when playing */
+.kittparent{
+display:flex;
+text-align: center;  
+min-height: 5vh;
+margin:auto;
+flex-direction:column;
+min-width:50%;
+}
+
+
+.matrix{
+display:flex;
+justify-content:space-between;
+width: 90%;
+margin:auto;
+}
+
+
+/*Use for blinking animation when playing radios*/
+.h2animation {
+            width:36%;
+            font-size: 2em;
+            color: black;
+            text-align: center;
+            animation: animate 
+                4s linear infinite;
+        }
+  
+        @keyframes animate {
+            0% {
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0.25;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            75% {
+                opacity: 0.75;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+
+
+/*Use for kit effect when playing radios*/
+i {
+    display: inline-block;
+    vertical-align:middle;
+    width:15rem;
+    height:1rem;
+    background: black;
+    -webkit-animation: kn 4s ease-in-out infinite;
+    animation: kn 4s ease-in-out infinite;
+}
+
+i:nth-child(9){
+    -webkit-animation-delay:0;
+    animation-delay:0;
+}
+i:nth-child(8){
+    -webkit-animation-delay:-0.2s;
+    animation-delay:-0.2s;
+}
+i:nth-child(7){
+    -webkit-animation-delay:-0.4s;
+    animation-delay:-0.4s;
+}
+i:nth-child(6){
+    -webkit-animation-delay:-0.6s;
+    animation-delay:-0.6s;
+}
+i:nth-child(5){
+    -webkit-animation-delay:-0.8s;
+    animation-delay:-0.8s;
+}
+i:nth-child(4){
+    -webkit-animation-delay:-1s;
+    animation-delay:-1s;
+}
+i:nth-child(3){
+    -webkit-animation-delay:-1.2s;
+    animation-delay:-1.2s;
+}
+i:nth-child(2){
+    -webkit-animation-delay:-1.4s;
+    animation-delay:-1.4s;
+}
+i:nth-child(1){
+    -webkit-animation-delay:-1.6s;
+    animation-delay:-1.6s;
+}
+
+@-webkit-keyframes kn {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity:0.1;
+    }
+}
+
+@keyframes kn {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity:0.1;
+    }
+}
+
+/*Used to central align add,radioconfig*/
+#radio{
+display:flex;
+width: 90%;
+font-size:2.8rem;
+margin:auto;
+justify-content: center;
+}
+
+.modradio{
+display:flex;
+width: 90%;
+margin:auto;
+justify-content: space-evenly;
+}
+
+/*Used for form in radio config*/
+.form_border{
+border-top-left-radius: 2rem;
+border-top-right-radius: 2rem;
+border-style:solid;
+border-color:black;
+padding:3rem;
+background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+border-bottom:none;
+}
+
+/*All url,name,label,text and wrappers used to align text in forms*/
+.namewrapper{
+display:flex;
+justify-content: flex-start;
+font-size:2rem;
+padding-top:1rem;
+}
+
+
+.urlwrapper{
+display:flex;
+justify-content: flex-start;
+font-size:2rem;
+padding-top:1rem;
+}
+
+
+
+.namelabel{
+display:flex;
+justify-content: center;
+font-size:2rem;
+padding-left:1rem;
+padding-right:1rem;
+}
+
+
+
+.urllabel{
+display:flex;
+justify-content: center;
+font-size:2rem;
+padding-left:1rem;
+padding-right:2.5rem;
+}
+
+
+
+.nametextbox{
+display:flex;
+justify-content: center;
+font-size:2rem;
+width:45rem;
+}
+
+.urltextbox{
+display:flex;
+justify-content: flex-start;
+font-size:2rem;
+width:45rem;
+}
+
+
+.frecuencytextbox{
+display:flex;
+justify-content: center;
+font-size:2rem;
+padding-left:5rem;
+padding-right:1rem;
+text-align: left;
+}
+
+
+.homeloctextbox{
+display:flex;
+justify-content: center;
+font-size:2rem;
+padding-left:5rem;
+padding-right:1rem;
+text-align: left;
+}
+
+
+/*Used for few buttons that I have */
+.button {
+  background-color:black; 
+border:solid;
+border-color:black;
+  color: white;
+  padding: 2rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2rem;
+  margin: 4rem 1rem;
+  cursor: pointer;
+width: 100%;
+margin:auto;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+/*Hover effect for button in Radio Config*/
+.button5:hover {
+  background-color: white;
+  color: black;
+  border:solid;
+  border-color:black;
+border-top:none;
+}
+
+
+/*Hover effect for button in Mod Radio*/
+
+
+
+
+.frecuencylabel{
+display:flex;
+justify-content: center;
+font-size:2rem;
+padding-left:1rem;
+padding-right:5.4rem;
+}
+
+
+
+/*Used to style export*/
+.maurilink{
+display:flex;
+width:90%;
+margin:auto;
+min-height:30vh;
+flex-direction:column-reverse;
+justify-content:flex-start;
+align-items: center;
+}
+
+/*Used to style heading, a in export*/
+.maurilink a {
+font-size:4rem;
+color:white;
+background-color:black;
+}
+
+/*Used to style hover of a in export*/
+.maurilink a:hover{
+color:white;
+background-color:grey;
+}
+
+
+
+
+/*Modify page css*/
+
+/*Used to style Select box in Mod Radio*/
+
+.head{
+display:flex;
+justify-content: center;
+flex-direction:column;
+width:90%;
+margin:auto;
+}
+
+.head h1{
+width:100%
+}
+
+#idselectbox{
+font-size:3rem;
+align-items: center;
+}
+
+.content{
+border:solid;
+border-color:black;
+margin:auto;
+width:90%;
+
+}
+
+.showh2{
+display:flex;
+background-color: black;
+align-items: center;
+color:white;
+margin:auto;
+width:90%;
+}
+
+
+.wrapper {
+    list-style-type: none;
+    display:flex;
+    padding: 0;
+    border-radius: 3px;
+    margin-top:5rem;
+  }
+  .form-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em;
+    margin:auto;
+    width:90%;
+  }
+  .form-row  label {
+    flex: 1;
+    font-size:3rem;
+  }
+  .form-row  input {
+    flex: 2;
+    padding-right:1rem;
+    font-size:3rem;
+  }
+.button2 {
+  background-color:black; 
+  color: white;
+  padding: 2rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2rem;
+/* margin: 4rem 1rem; */
+  cursor: pointer;
+/* width: 90%; */
+/* margin:auto; */
+border-color:black;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+align-content: flex-end;
+}
+.button2:hover {
+  background-color: white;
+  color: black;
+}
+
+
+/* Text is minimized when viewing in small device */
 @media (max-width:500px){
 html{
+  font-size: 30%;
+}
+}
 
-  font-size: 40%;
-}
-}
+

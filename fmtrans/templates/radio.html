@@ -1,37 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="Internet FM Radio"
+      content="Internet FM Radio"
+    />
+    <meta name="robots" content="index,follow" />
 {% load static %} 
 <script src="{%static 'jquery-3.6.0.js'%}"></script>
-<link rel="stylesheet" type="text/css" href="{%static 'tailwind.min.css'%}"/>
+<link rel="stylesheet" type="text/css" href="{%static 'style.css'%}"/>
+
 <link rel="stylesheet" type="text/css" href="{%static 'switch.css'%}"/>
 <title>Internet Radio FM Transmitter</title>
-	</head>
 
-	<body class="align-items: stretch;">
 
 <style>
+    
 
-    body{background:white!important;}
+#playli{
+background-color: white;
+}
+
+
+#playa{
+color:black;
+text-decoration: none;
+align-items: center;
+}
+
 
 </style>
 
+
+	</head>
+	<body> 
 {% include "menu.html" %}
+<h1> Internet Radio FM Transmitter </h1>
 
 
-<p class="text-lg text-center font-bold m-5" align="center">Internet Radio FM Transmitter 
-
-{%if trans_status == True %} 
-Currently Transmitting on {{frecuency}} MHZ FM
-{% endif %}
-
-
-
-</p>
-<table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800" align="center">
-<th class="w-1/2" >Radio Name</th><th class="w-1/2" >Status</th>
 {%for radio in radios %}
-<tr class="bg-gray-100 border-b border-gray-200"><td class="px-4 py-3" align="center">{{ radio.name}}</td> <td class="px-4 py-3"  align="center">{{radio.state}}<br> 									     
+{% if radio.state == "ON" %} 
+<div class="kittparent">
+ <h2 class="h2animation">Currently Transmitting on {{frecuency}} MHZ FM</h2>
+ <div class="matrix">
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+ </div>
+</div>
+{% endif %}
+{% endfor %}
+<table>
+<th>Radio Name</th><th>Status</th>
+{%for radio in radios %}
+<tr><td>{{ radio.name}}</td> <td>{{radio.state}}<br> 									     
 <form action="" method="post">
 {% csrf_token %}
 {%if radio.state == "ON" %} 
