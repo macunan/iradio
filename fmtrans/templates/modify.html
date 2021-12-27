@@ -30,7 +30,8 @@ function getCookie(name) {
   <script>
 
 $(document).ready(function () {
-    $("#idselectbox").change(function () {
+
+		  $("#idselectbox").click(function () {
       var id=$(this).val();
  $.ajax({
         url: '/ajax/',
@@ -56,15 +57,43 @@ newText=newText+newText2+newText3+newText4;
             console.log(error);
         }
     });
-
-
-
-
-
-//The new text that we want to show.
-
-
 	      });
+
+
+
+
+
+		  $("#idselectbox").ready(function () {
+      var id=$(this).val();
+ $.ajax({
+        url: '/ajax/',
+        type: "POST",
+        data: {
+            id: id
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        },
+        success: function (data) {
+			  console.log(data.id);
+            console.log(data.name);
+var newText ='<input type="hidden"  name="id" value="'+data.id+'">';
+var newText2 ='<ul class=wrapper"><li class="form-row"><label>name:</label><input type="text" name="name" value="'+data.name+'"></li>';
+var newText3 ='<li class="form-row"><label>url:</label><input type="text" name="url"   value="'+data.url+'"></li>';
+			  var newText4='<li class="form-row"><button  class="button2" type="submit" align="right">Modify</button></li></ul>'
+newText=newText+newText2+newText3+newText4;
+    //Change the text using the text method.
+    $('#ajaxform').html(newText);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+	      });
+
+
+
+
 	  });
 
 
@@ -104,7 +133,7 @@ align-items: center;
 	<body>
 {% include "menu.html" %}
 <header class="head">
-<h1>Modify Radio</h1>
+<h1>Select radio from the list to modify</h1>
 {%if change %}
 <h2>Changes have been saved</h2>
 {% endif %}
