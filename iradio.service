@@ -1,7 +1,9 @@
 [Unit]
 Description=fmtranservice
 [Service]
+KillMode=none
 ExecStart=/home/iradio/radio.sh
+ExecStop=/home/iradio/stopiradio.sh
 PIDFile=/var/run/fmtrans.pid
 Restart=always
 RestartSec=30

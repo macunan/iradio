@@ -17,11 +17,13 @@ class Server_Ops:
        if len(radio_name)>64:
         radio_name=radio_name[0:64]
        start="sox -t mp3 "
-       end=" -t wav - |pi_fm_rds -freq "+freq+ "   -rt '"+radio_name+"' -audio -"
-# end=" -r 22050 -c 1 -b 16 -t wav - |fm_transmitter -f  91.0 -"
+       # start="ffmpeg -i "
+# end=" -t wav - |pi_fm_adv --freq "+freq+ "   --rt '"+radio_name+"' --audio -"
+# end="  -r 44100 -b 16 -e signed -t wav - |fm_transmitter -f  91.5 -"
+       end=" -r 22050 -c 1 -b 16 -t wav - |fm_transmitter -f  91.5 -"
        init="#!/bin/bash"
        script=start+url+end
-       file = open(home_loc+"radio.sh", "w") 
+       file = open(home_loc+"radio.sh", "w")
        file.write(init+"\n")
        file.write(script)
        file.close()
@@ -34,7 +36,7 @@ class Server_Ops:
 # static/books/tarea1.png
 # /srv/http/books/ebooksclub.org__NetBeans_IDE_7_Cookbook.pdf""
             files[i]=s.replace('/srv/http/','/static/')
-            i=i+1 
+            i=i+1
 
 
         return(files)
@@ -44,7 +46,7 @@ class Server_Ops:
        config = Config.objects.latest('id')
        home_loc=config.homelocation
        radios=Radios.objects.all()
-       file = open(home_loc+"stations.csv", "w") 
+       file = open(home_loc+"stations.csv", "w")
        for radio in radios :
         print(radio.name)
         print(radio.url)
