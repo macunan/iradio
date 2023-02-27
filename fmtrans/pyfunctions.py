@@ -8,7 +8,6 @@ class Server_Ops:
     def restart(self):
        os.system("systemctl restart iradio")
     def writefile(self,id):
-       os.system("pkill ffmpeg")
        id=int(id)
        config = Config.objects.latest('id')
        url=Radios.objects.get(id=id).url
@@ -22,7 +21,7 @@ class Server_Ops:
         radio_name=radio_name[0:64]
 
        end=" -f wav -bitexact -acodec pcm_s16le -ar 22050 -ac 2 -y" +" "+wav_location+"radio.wav &" 
-       end2=" sleep 2"+ "\n"+" fm_transmitter -f "+freq+" -d 3 -b "+bandwidth+ " "+wav_location+"radio.wav"
+       end2=" sleep 5"+ "\n"+" fm_transmitter -f "+freq+" -d 3 -b "+bandwidth+ " "+wav_location+"radio.wav"
 
 # start="curl "+url+"|egrep -o 'https?:.*'|tail -n 1"
 # os.system(start+" > "+home_loc+"radio.sh")
