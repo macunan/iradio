@@ -9,14 +9,14 @@
  
 - https://github.com/markondej/fm_transmitter
 
-- Note You can transmit local mp3 files or remote url streams of your favorite internet radios stations.
+- Note You can transmit local mp3/aac files or remote url streams of your favorite internet radios stations.
 
 # Requirements
 - Linux Instalation running on Raspbery pi 3b+ board.
 - Small connector cable for GPIO 4 (pin 7 on header P1).
 - A bit of time and effort.
 - Good power supply for your raspberry pi.
-- Fm Receiver so you can listen to your internet radio  or mp3s.
+- Fm Receiver so you can listen to your internet radio  or mp3/aac.
 - Computer or phone/tablet to follow all steps.
 - ssh access your raspberry pi and root like user to execute backend commands
 - Be careful with your country/state regulations regarding FM  transmissions is your responsibility to follow them and comply with local laws and regulations in your region.

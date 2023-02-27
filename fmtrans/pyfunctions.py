@@ -14,12 +14,15 @@ class Server_Ops:
        url=Radios.objects.get(id=id).url
        freq=config.frecuency
        home_loc=config.homelocation
+       wav_location=config.wavlocation
+       dma_channel=config.dma_channel
+       bandwidth=config.bandwidth
        radio_name=Radios.objects.get(id=id).name
        if len(radio_name)>64:
         radio_name=radio_name[0:64]
 
-       end=" -f wav -bitexact -acodec pcm_s16le -ar 22050 -ac 2 -y /files/movies/movies/radio.wav &" 
-       end2=" sleep 2"+ "\n"+" fm_transmitter -f "+freq+" -d 3 -b 300  /files/movies/movies/radio.wav"
+       end=" -f wav -bitexact -acodec pcm_s16le -ar 22050 -ac 2 -y" +" "+wav_location+"radio.wav &" 
+       end2=" sleep 2"+ "\n"+" fm_transmitter -f "+freq+" -d 3 -b "+bandwidth+ " "+wav_location+"radio.wav"
 
 # start="curl "+url+"|egrep -o 'https?:.*'|tail -n 1"
 # os.system(start+" > "+home_loc+"radio.sh")
