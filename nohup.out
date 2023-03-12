@@ -1,0 +1,48 @@
+ffmpeg version git-2023-02-16-aeceefa6 Copyright (c) 2000-2023 the FFmpeg developers
+  built with gcc 12.1.0 (GCC)
+  configuration: --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-openssl --enable-gpl --enable-omx --enable-omx-rpi --enable-mmal
+  libavutil      58.  1.100 / 58.  1.100
+  libavcodec     60.  2.100 / 60.  2.100
+  libavformat    60.  2.100 / 60.  2.100
+  libavdevice    60.  0.100 / 60.  0.100
+  libavfilter     9.  2.100 /  9.  2.100
+  libswscale      7.  0.100 /  7.  0.100
+  libswresample   4.  9.100 /  4.  9.100
+  libpostproc    57.  0.100 / 57.  0.100
+Input #0, mp3, from 'https://streamssl.eu:1288/stream?type=http':
+  Metadata:
+    icy-notice1     : <BR>This stream requires <a href="http://www.winamp.com">Winamp</a><BR>
+    icy-notice2     : Shoutcast DNAS/posix(linux x64) v2.6.1.777<BR>
+    icy-name        : Radio Universidad Tecnica Federico Santa Maria 99,7 Mhz - 1450 KHz. Valparaiso. Chile.
+    icy-genre       : Classical
+    icy-br          : 128
+    icy-sr          : 44100
+    icy-url         : http://www.shoutcast.com
+    icy-pub         : 0
+  Duration: N/A, start: 0.000000, bitrate: 128 kb/s
+  Stream #0:0: Audio: mp3, 44100 Hz, stereo, fltp, 128 kb/s
+At least one output file must be specified
+ffmpeg version git-2023-02-16-aeceefa6 Copyright (c) 2000-2023 the FFmpeg developers
+  built with gcc 12.1.0 (GCC)
+  configuration: --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-openssl --enable-gpl --enable-omx --enable-omx-rpi --enable-mmal
+  libavutil      58.  1.100 / 58.  1.100
+  libavcodec     60.  2.100 / 60.  2.100
+  libavformat    60.  2.100 / 60.  2.100
+  libavdevice    60.  0.100 / 60.  0.100
+  libavfilter     9.  2.100 /  9.  2.100
+  libswscale      7.  0.100 /  7.  0.100
+  libswresample   4.  9.100 /  4.  9.100
+  libpostproc    57.  0.100 / 57.  0.100
+Input #0, mp3, from 'https://streamssl.eu:1288/stream?type=http':
+  Metadata:
+    icy-notice1     : <BR>This stream requires <a href="http://www.winamp.com">Winamp</a><BR>
+    icy-notice2     : Shoutcast DNAS/posix(linux x64) v2.6.1.777<BR>
+    icy-name        : Radio Universidad Tecnica Federico Santa Maria 99,7 Mhz - 1450 KHz. Valparaiso. Chile.
+    icy-genre       : Classical
+    icy-br          : 128
+    icy-sr          : 44100
+    icy-url         : http://www.shoutcast.com
+    icy-pub         : 0
+  Duration: N/A, start: 0.000000, bitrate: 128 kb/s
+  Stream #0:0: Audio: mp3, 44100 Hz, stereo, fltp, 128 kb/s
+At least one output file must be specified
