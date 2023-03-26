@@ -76,16 +76,17 @@ sox  https://api.spreaker.com/listen/user/kgra/episode/latest/shoutcast.mp3
 If you get any errors try a url that you know that works and try again if not you might need to compile sox from source.
 
 3b-
-Added ffmpeg functionality to play aac streams also you can play mp3 and aac files and transmit. But ffmpeg does not support play list like pls and m3u formats, for that it check your url and if it detects play list file it goes back to sox above. However you need to compile ffmpeg to support aac 
+Added ffmpeg functionality to play aac streams also you can play mp3 and aac files and transmit. But ffmpeg does not support playlist like pls and m3u formats, for that the program  checks your radio url and if it detects playlist file it goes back to sox above. However you need to compile ffmpeg to support aac and https with --enable-openssl option
 
-```
+```sh
 git clone https://github.com/FFmpeg
 cd ffmpeg
 
 ```
 Ideally the following config  might need to install some codecs and libraries
 
-```
+
+```sh
 ./configure   --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-openssl --enable-gpl --enable-omx --enable-omx-rpi --enable-mmal
 
 
@@ -95,17 +96,16 @@ make install
 ```
 if above does not work google is your friend and try to use less options in the configure part:
 
-./configure   --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-openssl --enable-gpl --enable-omx
-
+```sh
+./configure   --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-openssl --enable-gpl
 make -j2
 make install
-
 ```
 
 
 If everything ok you should get something like this
 
-```
+```sh
  ffmpeg -
 ffmpeg version git-2023-02-16-aeceefa6 Copyright (c) 2000-2023 the FFmpeg developers
   built with gcc 12.1.0 (GCC)
@@ -124,11 +124,8 @@ ffmpeg version git-2023-02-16-aeceefa6 Copyright (c) 2000-2023 the FFmpeg develo
 Compiling ffmpeg was the harders part for me, I recommend complete update before starting
 pacman -Syu then try again and try installing missing packages
 
-But once finished very low cpu usage :
-
-
-
-```
+But once finished very low cpu usage so well worth it:
+```sh
 Tasks: 178 total,   1 running, 177 sleeping,   0 stopped,   0 zombie
 %Cpu(s):  7,8 us,  2,1 sy,  0,0 ni, 89,1 id,  0,9 wa,  0,0 hi,  0,1 si,  0,0 st
 MiB Mem :    869,1 total,    263,4 free,    230,8 used,    374,8 buff/cache
