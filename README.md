@@ -8,6 +8,7 @@
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
  
 - https://github.com/markondej/fm_transmitter
+-https://github.com/FFmpeg
 
 - Note You can transmit local mp3/aac files or remote url streams of your favorite internet radios stations.
 
@@ -19,6 +20,7 @@
 - Fm Receiver so you can listen to your internet radio  or mp3/aac.
 - Computer or phone/tablet to follow all steps.
 - ssh access your raspberry pi and root like user to execute backend commands
+- Install sox pacman -S sox and download and compile ffmmpeg to support https streams
 - Be careful with your country/state regulations regarding FM  transmissions is your responsibility to follow them and comply with local laws and regulations in your region.
 # Installation
 
@@ -63,7 +65,7 @@ iradio:x:0:0:root:/home/iradio:/bin/bash
 
 Once you are sure the latter is installed and transmitting correctly proceed with next step:
 
-3-
+3a-
 Install sox in my OS command is pacman -S sox, also in ubuntu like systems it can be sudo apt-get install sox
 
 Make sure sox is able to play local and remote streams
@@ -72,6 +74,77 @@ Example
 sox  https://api.spreaker.com/listen/user/kgra/episode/latest/shoutcast.mp3
 ```
 If you get any errors try a url that you know that works and try again if not you might need to compile sox from source.
+
+3b-
+Added ffmpeg functionality to play aac streams also you can play mp3 and aac files and transmit. But ffmpeg does not support play list like pls and m3u formats, for that it check your url and if it detects play list file it goes back to sox above. However you need to compile ffmpeg to support aac 
+
+```
+git clone https://github.com/FFmpeg
+cd ffmpeg
+
+```
+Ideally the following config  might need to install some codecs and libraries
+
+```
+./configure   --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-openssl --enable-gpl --enable-omx --enable-omx-rpi --enable-mmal
+
+
+make -j2
+make install
+
+```
+if above does not work google is your friend and try to use less options in the configure part:
+
+./configure   --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-openssl --enable-gpl --enable-omx
+
+make -j2
+make install
+
+```
+
+
+If everything ok you should get something like this
+
+```
+ ffmpeg -
+ffmpeg version git-2023-02-16-aeceefa6 Copyright (c) 2000-2023 the FFmpeg developers
+  built with gcc 12.1.0 (GCC)
+  configuration: --enable-nonfree --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-openssl --enable-gpl --enable-omx --enable-omx-rpi --enable-mmal
+  libavutil      58.  1.100 / 58.  1.100
+  libavcodec     60.  2.100 / 60.  2.100
+  libavformat    60.  2.100 / 60.  2.100
+  libavdevice    60.  0.100 / 60.  0.100
+  libavfilter     9.  2.100 /  9.  2.100
+  libswscale      7.  0.100 /  7.  0.100
+  libswresample   4.  9.100 /  4.  9.100
+  libpostproc    57.  0.100 / 57.  0.100
+
+```
+
+Compiling ffmpeg was the harders part for me, I recommend complete update before starting
+pacman -Syu then try again and try installing missing packages
+
+But once finished very low cpu usage :
+
+
+
+```
+Tasks: 178 total,   1 running, 177 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  7,8 us,  2,1 sy,  0,0 ni, 89,1 id,  0,9 wa,  0,0 hi,  0,1 si,  0,0 st
+MiB Mem :    869,1 total,    263,4 free,    230,8 used,    374,8 buff/cache
+MiB Swap:      0,0 total,      0,0 free,      0,0 used.    622,0 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                             
+15193 root      20   0       0      0      0 I   7,6   0,0   0:09.27 kworker/2:0-events_freezable                        
+14089 root      20   0   25116   3636   3112 S   3,0   0,4   0:39.34 fm_transmitter                                      
+14088 root      20   0  108964  21204  17568 S   2,3   2,4   0:33.80 ffmpeg                                              
+12451 root      20   0       0      0      0 I   1,3   0,0   1:11.86 kworker/2:1-events                                  
+15713 root      20   0   11800   3280   2764 R   1,3   0,4   0:00.29 top                                                 
+    1 root      20   0   37136   9092   6864 S   1,0   1,0  28:45.24 systemd                                             
+  369 root      20   0   15140   5892   5200 S   0,7   0,7   2:26.54 systemd-logind                                      
+  171 root      20   0       0      0     
+
+```
 
 4- Install Python and Django and tmux
 
