@@ -17,15 +17,13 @@ class RadioForm(ModelForm):
 class ConfigForm(ModelForm):
     class Meta:
         model=Config
-        fields=['id','frecuency','homelocation','wavlocation','dma_channel','bandwidth']
+        fields=['id','frecuency','homelocation','dma_channel','bandwidth']
         widgets = {
             'frecuency': forms.TextInput(attrs={
             'class': 'frecuencytextbox'
             }),
             'homelocation': forms.TextInput(attrs={
             'class': 'homeloctextbox'}),
-            'wavlocation': forms.TextInput(attrs={
-            'class': 'wavloctextbox'}),
             'dma_channel': forms.TextInput(attrs={
             'class': 'dma_channelloctextbox'}),
             'bandwidth': forms.TextInput(attrs={

@@ -77,7 +77,6 @@ class AuthUserUserPermissions(models.Model):
 class Config(models.Model):
     frecuency = models.TextField(blank=True, null=True)
     homelocation = models.TextField(blank=True, null=True)
-    wavlocation = models.TextField(blank=True, null=True)
     dma_channel = models.TextField(blank=True, null=True)
     bandwidth = models.TextField(blank=True, null=True)
 
