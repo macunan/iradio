@@ -77,6 +77,7 @@ class AuthUserUserPermissions(models.Model):
 class Config(models.Model):
     frecuency = models.TextField(blank=True, null=True)
     homelocation = models.TextField(blank=True, null=True)
+    wavlocation = models.TextField(blank=True, null=True)
     dma_channel = models.TextField(blank=True, null=True)
     bandwidth = models.TextField(blank=True, null=True)
 
@@ -133,6 +134,8 @@ class Radios(models.Model):
     name = models.TextField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
     state = models.TextField(blank=True, null=True)
+    bandwidth = models.TextField(blank=True, null=True)
+    statecount = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False

@@ -38,11 +38,6 @@ align-items: center;
 
 
 
-{%if change %}
-<div class="showh2">
-    <h2> Sucess Radio has been added!</h2>
-</div>
-{% endif %}
 
 
 	<div class="content">
@@ -51,6 +46,7 @@ align-items: center;
 
 <ul class=wrapper"><li class="form-row"><label>Name:</label>{{form.name}}</li>
 <li class="form-row"><label>URL:</label>{{form.url}}</li>
+<li class="form-row"><label>Bandwidth:</label>{{form.bandwidth}}</li>
 <li class="form-row"><button  class="button2" type="submit" align="right">Add</button></li></ul>
 	</div>
 	<br>
@@ -63,5 +59,10 @@ align-items: center;
 </div>
 
 
+{%if change %}
+<div class="showh2">
+    <h2> Sucess Radio has been added!</h2>
+</div>
+{% endif %}
 </body>
 </html>

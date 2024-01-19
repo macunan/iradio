@@ -12,6 +12,8 @@
 
 - Note You can transmit local mp3/aac files or remote url streams of your favorite internet radios stations.
 
+- Latest change added variable bandwidth for each station
+
 # Requirements
 - Linux Instalation running on Raspbery pi 3b+ board.
 - Small connector cable for GPIO 4 (pin 7 on header P1).

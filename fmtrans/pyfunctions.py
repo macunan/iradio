@@ -14,13 +14,13 @@ class Server_Ops:
        freq=config.frecuency
        home_loc=config.homelocation
        dma_channel=config.dma_channel
-       bandwidth=config.bandwidth
+       bandwidth=Radios.objects.get(id=id).bandwidth
        radio_name=Radios.objects.get(id=id).name
        url_type=self.urltype(url)
        if len(radio_name)>64:
         radio_name=radio_name[0:64]
        if url_type == "ffmpeg":
-        end=" -bitexact  -acodec pcm_s16le -ar 44100 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
+        end=" -bitexact  -acodec pcm_s16le -ar 22050 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
         init="#!/bin/bash"
         script="ffmpeg -i "+url+end
         file = open(home_loc+"radio.sh", "w")
@@ -28,9 +28,9 @@ class Server_Ops:
         file.write(script)
         file.close()
        else:
-        end=" -bitexact  -acodec pcm_s16le -ar 44100 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
+        end=" -bitexact  -acodec pcm_s16le -ar 22050 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
         init="#!/bin/bash"
-        end=" -r 44100 -b 16 -e signed -t wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
+        end=" -r 22050 -c 2 -b 16 -t wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
         script="sox -t mp3 "+url+end
         file = open(home_loc+"radio.sh", "w")
         file.write(init+"\n")

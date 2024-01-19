@@ -22,6 +22,10 @@ def index(request):
          ops=Server_Ops()
          ops.stop()
          Radios.objects.filter(state='ON').update(state='OFF')
+         radios=Radios.objects.all().order_by('-state')
+         frecuency = Config.objects.latest('id').frecuency
+         context={'radios':radios,'frecuency':frecuency,'trans_status':transmit_status}
+         return render(request,'radio.html',context)
         if len(request.POST) > 1:
             ops=Server_Ops()
             ops.writefile(request.POST["id"])
@@ -29,12 +33,21 @@ def index(request):
             Radios.objects.filter(id=int(request.POST["id"])).update(state='ON')
             transmit_status=True
             ops.restart()
+            radios=Radios.objects.all().order_by('-state')
+            frecuency = Config.objects.latest('id').frecuency
+            context={'radios':radios,'frecuency':frecuency,'trans_status':transmit_status}
+            return render(request,'radio.html',context)
 
-# on_radio_id=Radios.objects.get(state="ON").id
-    radios=Radios.objects.all().order_by('-state')
+
+
+    radios=Radios.objects.all().order_by('statecount')
     frecuency = Config.objects.latest('id').frecuency
     context={'radios':radios,'frecuency':frecuency,'trans_status':transmit_status}
     return render(request,'radio.html',context)
+
+
+
+# on_radio_id=Radios.objects.get(state="ON").id
 
 
 def light(request):
@@ -85,6 +98,7 @@ def modify(request):
         if request.method == "POST":
             Radios.objects.filter(id=int(request.POST["id"])).update(name=request.POST["name"])
             Radios.objects.filter(id=int(request.POST["id"])).update(url=request.POST["url"])
+            Radios.objects.filter(id=int(request.POST["id"])).update(bandwidth=request.POST["bandwidth"])
             radios=Radios.objects.all()
             context={'radios':radios,'change':True}
             return render(request,'modify.html',context)
@@ -102,11 +116,11 @@ def ajax_view(request):
    if request.method == "POST":
         print(request.POST)
         radio=Radios.objects.get(id=int(request.POST["id"]))
-        
         data = {
             "id": request.POST["id"],
             "name":radio.name,
-            "url":radio.url
+            "url":radio.url,
+            "bandwidth":radio.bandwidth
         }
         return JsonResponse(data)
 

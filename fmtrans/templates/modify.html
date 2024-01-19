@@ -31,7 +31,7 @@ function getCookie(name) {
 
 $(document).ready(function () {
 
-		  $("#idselectbox").click(function () {
+		  $("#idselectbox").change(function () {
       var id=$(this).val();
  $.ajax({
         url: '/ajax/',
@@ -45,11 +45,13 @@ $(document).ready(function () {
         success: function (data) {
 			  console.log(data.id);
             console.log(data.name);
+            console.log(data.bandwidth);
 var newText ='<input type="hidden"  name="id" value="'+data.id+'">';
-var newText2 ='<ul class=wrapper"><li class="form-row"><label>name:</label><input type="text" name="name" value="'+data.name+'"></li>';
-var newText3 ='<li class="form-row"><label>url:</label><input type="text" name="url"   value="'+data.url+'"></li>';
-			  var newText4='<li class="form-row"><button  class="button2" type="submit" align="right">Modify</button></li></ul>'
-newText=newText+newText2+newText3+newText4;
+var newText2 ='<ul class=wrapper"><li class="form-row"><label>Name:</label><input type="text" name="name" value="'+data.name+'"></li>';
+var newText3 ='<li class="form-row"><label>Url:</label><input type="text" name="url"   value="'+data.url+'"></li>';
+var newText4 ='<li class="form-row"><label>Bandwidth:</label><input type="text" name="bandwidth"   value="'+data.bandwidth+'"></li>';
+var newText5='<li class="form-row"><button  class="button2" type="submit" align="right">Modify</button></li></ul>';
+		newText=newText+newText2+newText3+newText4+newText5;
     //Change the text using the text method.
     $('#ajaxform').html(newText);
         },
@@ -78,10 +80,11 @@ newText=newText+newText2+newText3+newText4;
 			  console.log(data.id);
             console.log(data.name);
 var newText ='<input type="hidden"  name="id" value="'+data.id+'">';
-var newText2 ='<ul class=wrapper"><li class="form-row"><label>name:</label><input type="text" name="name" value="'+data.name+'"></li>';
-var newText3 ='<li class="form-row"><label>url:</label><input type="text" name="url"   value="'+data.url+'"></li>';
-			  var newText4='<li class="form-row"><button  class="button2" type="submit" align="right">Modify</button></li></ul>'
-newText=newText+newText2+newText3+newText4;
+var newText2 ='<ul class=wrapper"><li class="form-row"><label>Name:</label><input type="text" name="name" value="'+data.name+'"></li>';
+var newText3 ='<li class="form-row"><label>Url:</label><input type="text" name="url"   value="'+data.url+'"></li>';
+var newText4 ='<li class="form-row"><label>Bandwidth:</label><input type="text" name="bandwidth"   value="'+data.bandwidth+'"></li>';
+var newText5='<li class="form-row"><button  class="button2" type="submit" align="right">Modify</button></li></ul>';
+newText=newText+newText2+newText3+newText4+newText5;
     //Change the text using the text method.
     $('#ajaxform').html(newText);
         },
@@ -134,9 +137,6 @@ align-items: center;
 {% include "menu.html" %}
 <header class="head">
 <h1>Select radio from the list to modify</h1>
-{%if change %}
-<h2>Changes have been saved</h2>
-{% endif %}
 <select name='selectbox' id='idselectbox'>
 {%for radio in radios %}
 <option value='{{radio.id}}'>{{radio.name}}</option>
@@ -150,5 +150,9 @@ align-items: center;
 	<div id='ajaxform'> </div>
 </form>
 </section>
+
+{%if change %}
+<h2>Changes have been saved</h2>
+{% endif %}
 </body>
 </html>
