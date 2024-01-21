@@ -65,7 +65,7 @@ var newText5='<li class="form-row"><button  class="button2" type="submit" align=
 
 
 
-		  $("#idselectbox").ready(function () {
+		  $("#idselectbox").click(function () {
       var id=$(this).val();
  $.ajax({
         url: '/ajax/',
@@ -78,7 +78,7 @@ var newText5='<li class="form-row"><button  class="button2" type="submit" align=
         },
         success: function (data) {
 			  console.log(data.id);
-            console.log(data.name);
+            console.log("ready"+data.name);
 var newText ='<input type="hidden"  name="id" value="'+data.id+'">';
 var newText2 ='<ul class=wrapper"><li class="form-row"><label>Name:</label><input type="text" name="name" value="'+data.name+'"></li>';
 var newText3 ='<li class="form-row"><label>Url:</label><input type="text" name="url"   value="'+data.url+'"></li>';
