@@ -134,7 +134,7 @@ class Radios(models.Model):
     name = models.TextField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
     state = models.TextField(blank=True, null=True)
-    bandwidth = models.TextField(blank=True, null=True)
+    bandwidth = models.TextField(blank=False, null=False, default='200')
     statecount = models.IntegerField(blank=True, null=True)
 
     class Meta:
