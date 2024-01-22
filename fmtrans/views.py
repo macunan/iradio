@@ -22,15 +22,22 @@ def index(request):
          ops=Server_Ops()
          ops.stop()
          Radios.objects.filter(state='ON').update(state='OFF')
-         radios=Radios.objects.all().order_by('-state')
+# Radios.objects.all().update(statecount=0)
+         radios=Radios.objects.all().order_by('-statecount')
          frecuency = Config.objects.latest('id').frecuency
          context={'radios':radios,'frecuency':frecuency,'trans_status':transmit_status}
          return render(request,'radio.html',context)
         if len(request.POST) > 1:
             ops=Server_Ops()
             ops.writefile(request.POST["id"])
+# print(request.POST["id"])
+            statecount1 = Radios.objects.filter(id=request.POST["id"]).values('statecount')[0]['statecount']+1
+            print(statecount1)
+# print(statecount1['statecount'])
+# statecount1=int(statecount1)+1
             Radios.objects.filter(state='ON').update(state='OFF')
             Radios.objects.filter(id=int(request.POST["id"])).update(state='ON')
+            Radios.objects.filter(id=int(request.POST["id"])).update(statecount=statecount1)
             transmit_status=True
             ops.restart()
             radios=Radios.objects.all().order_by('-state')
@@ -40,7 +47,7 @@ def index(request):
 
 
 
-    radios=Radios.objects.all().order_by('statecount')
+    radios=Radios.objects.all().order_by('-statecount')
     frecuency = Config.objects.latest('id').frecuency
     context={'radios':radios,'frecuency':frecuency,'trans_status':transmit_status}
     return render(request,'radio.html',context)
