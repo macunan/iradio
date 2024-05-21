@@ -18,6 +18,8 @@ from django.http.response import HttpResponse
 def index(request):
     transmit_status=False
     if request.method == "POST":
+        print(len(request.POST))
+        print(request.POST)
         if len(request.POST) == 1:
          ops=Server_Ops()
          ops.stop()
