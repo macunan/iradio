@@ -1,6 +1,7 @@
 #!/bin/bash
 connection_test=`ping -c1 192.168.31.1 | grep  -o '1 packets transmitted, 1 received'`
-decoder_program_running=`ps ucx  |grep -e 'ffmpeg' -e 'sox'| wc -l`
+decoder_program_running=`ps ux |grep -E 'ffmpeg|sox' |grep -e 'wav' | wc -l`
+# decoder_program_sox_running=`ps ux |grep sox  |grep -e 'wav' | wc -l`
 fm_transmitter_running=`ps ucx|grep fm_transmitter|wc -l`
 iradio_running=`systemctl status iradio|grep -o running`
 good_connection="1 packets transmitted, 1 received"
@@ -18,7 +19,7 @@ restart_iradio=` systemct restart iradio_networkrestart.service;systemctl restar
 else 
 echo "network ok"
 fi
-if [ "$fm_transmitter_running" == "0" ] || [ "$decoder_program_running" == "0" ]
+if [ "$fm_transmitter_running" == "0" ] || [ "$decoder_program_running" == "0" ] 
 then
 echo "decoder not running restarting iradio"
 restart_iradio=`systemctl restart iradio`
