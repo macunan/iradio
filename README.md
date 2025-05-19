@@ -4,15 +4,18 @@
 
 
 - Iradio is browser based controller to transmitt FM radio from your Rasberry pi uses Django as front end and python together with the awesome RM Radio transmitter  by Christophe Jaquet and Arch Linux Arm Branch 
-
+- Also supports youtube transmission link thanks to  https://github.com/yt-dlp/yt-dlp please support that great project ! (Please note I used Arm7 ejecutable https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux_armv7l)
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
- 
 - https://github.com/markondej/fm_transmitter
 -https://github.com/FFmpeg
 
-- Note You can transmit local mp3/aac files or remote url streams of your favorite internet radios stations.
+- Note You can transmit local mp3/aac files or remote url streams of your favorite internet radios stations. Also with latest version you can support youtube stream audio.
+https://github.com/ytdl-org/youtube-dl 
+
 
 - Latest change added variable bandwidth for each station
+- Added youtube url support.
+- Added support for m3u8 like stations for example https://ndtv24x7elemarchana.akamaized.net/hls/live/2003678/ndtv24x7/masterp_360p@1.m3u8 (Assumes you compliled ffmpeg for raspberry pi (need the https)
 
 # Requirements
 - Linux Instalation running on Raspbery pi 3b+ board.
@@ -24,6 +27,8 @@
 - ssh access your raspberry pi and root like user to execute backend commands
 - Install sox pacman -S sox and download and compile ffmmpeg to support https streams
 - Be careful with your country/state regulations regarding FM  transmissions is your responsibility to follow them and comply with local laws and regulations in your region.
+- https://github.com/ytdl-org/youtube-dl Compatible with your system arquitecture I added for Raspberry pi 3 here
+
 # Installation
 
 1-  I used Arch linux arm for my installation but I believe it can be any Linux as long as you have a recent kernel in my case 5.10.60-1-ARCH #1 SMP Sat Aug 21 14:56:38 UTC 2021 armv7l GNU/Linux it should be fine. Note only recent Kernel will function without issues, older kernel might work but you might face some issues.
@@ -171,7 +176,7 @@ pip install django-ninja
 git clone  https://github.com/macunan/iradio
 ```
 
-6- Install and configure systemd iradio.service
+6a- Install and configure systemd iradio.service
 - As root like user navigate to:
 ```sh
 cd /etc/systemd/system
@@ -216,6 +221,18 @@ Note you can configure location in config section in the menu and also the trans
 Note homelocation referes of where radio.sh will be located. Systemd is used to start and stop the radio transmission.
 
 
+
+
+6b
+
+copy file downloaded from:
+https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux_armv7l
+to /usr/local/bin also included 
+
+```sh
+which yt-dlp_linux_armv7l       
+/usr/local/bin/yt-dlp_linux_armv7l
+ ```
 
 
 7- execute tmux and run

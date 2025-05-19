@@ -5,8 +5,10 @@ from .models import Radios, Config
 class Server_Ops:
     def stop(self):
        os.system("systemctl stop iradio")
+
     def restart(self):
        os.system("systemctl restart iradio")
+
     def writefile(self,id):
        id=int(id)
        config = Config.objects.latest('id')
@@ -17,8 +19,20 @@ class Server_Ops:
        bandwidth=Radios.objects.get(id=id).bandwidth
        radio_name=Radios.objects.get(id=id).name
        url_type=self.urltype(url)
+
        if len(radio_name)>64:
         radio_name=radio_name[0:64]
+
+       if url_type == "youtube":
+        end=" -bitexact  -acodec pcm_s16le -ar 22050 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
+        init="#!/bin/bash"
+        script="yt-dlp_linux_armv7l -o - "+url+" | ffmpeg -i - "+end
+        file = open(home_loc+"radio.sh", "w")
+        file.write(init+"\n")
+        file.write(script)
+        file.close()
+        return
+
        if url_type == "ffmpeg":
         end=" -bitexact  -acodec pcm_s16le -ar 22050 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
         init="#!/bin/bash"
@@ -36,6 +50,7 @@ class Server_Ops:
         file.write(init+"\n")
         file.write(script)
         file.close()
+
     def run_fast_scandir(self,dir):    # dir: str, ext: list
         s="";
         i=0
@@ -46,14 +61,22 @@ class Server_Ops:
 # /srv/http/books/ebooksclub.org__NetBeans_IDE_7_Cookbook.pdf""
             files[i]=s.replace('/srv/http/','/static/')
             i=i+1
-
-
         return(files)
+
     def urltype(self,url):
+
+        if "youtube" in url:
+         return "youtube"
+
         if "pls" in url:
          return "sox"
+
+        if "m3u8" in url:
+         return "ffmpeg"
+
         if "m3u" in url:
          return "sox"
+
         return "ffmpeg"
 
 
