@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  iradio:
+    image: iradio-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: iradio
+    network_mode: host
+    hostname: iradio
+    devices:
+      - "/dev/mem:/dev/mem"
+    privileged: true
+    restart: always

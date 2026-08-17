@@ -1,0 +1,110 @@
+# ==========================================
+# ETAPA 1: Compilación de FFmpeg y Pi-FM-RDS
+# ==========================================
+FROM --platform=linux/arm64 alpine:3.20 AS builder
+
+RUN apk update && apk add --no-cache \
+    build-base \
+    sox \
+    clang \
+    cmake \
+    coreutils \
+    freetype-dev \
+    git \
+    lame-dev \
+    libass-dev \
+    opus-dev \
+    libvorbis-dev \
+    libvpx-dev \
+    libwebp-dev \
+    nasm \
+    openssl-dev \
+    pkgconf \
+    x264-dev \
+    x265-dev \
+    yasm \
+    python3 \
+    py3-pip \
+    zlib-dev \
+    libsndfile-dev
+
+WORKDIR /app/src
+RUN git clone --depth 1 --branch n7.0 https://github.com/ffmpeg/ffmpeg
+
+WORKDIR /app/src/ffmpeg
+RUN ./configure \
+    --prefix=/usr/local \
+    --enable-gpl \
+    --enable-nonfree \
+    --enable-openssl \
+    --enable-libx264 \
+    --enable-libx265 \
+    --enable-libvpx \
+    --enable-libopus \
+    --enable-libvorbis \
+    --enable-libmp3lame \
+    --enable-libfreetype \
+    --enable-libass \
+    --enable-libwebp \
+    --enable-shared \
+    --disable-doc \
+    --disable-static && \
+    make -j16 && \
+    make install
+
+WORKDIR /root
+RUN git clone https://github.com/ChristopheJacquet/PiFmRds
+WORKDIR /root/PiFmRds/src
+RUN make clean && make
+
+WORKDIR /root
+RUN git clone https://github.com/macunan/iradio
+
+# ==========================================
+# ETAPA 2: Imagen Final Ejecutable (Limpia)
+# ==========================================
+FROM --platform=linux/arm64 alpine:3.20
+
+# Se agregan python3 y py3-pip a las utilidades en tiempo de ejecución
+RUN  apk add --no-cache \
+    freetype \
+    lame \
+    libass \
+    libcrypto3 \
+    opus \
+    libssl3 \
+    libvorbis \
+    libvpx \
+    libwebp \
+    nano \
+    x264-libs \
+    x265 \
+    libsndfile \
+    zip \
+    git \
+    supervisor \
+    python3 \
+    py3-pip
+
+# Instalar los módulos de Python requeridos por el proyecto iradio
+RUN pip install --no-cache-dir --break-system-packages \
+    django \
+    django-ninja \
+    pytubefix
+
+ENV LD_LIBRARY_PATH=/usr/local/lib
+
+COPY --from=builder /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
+COPY --from=builder /usr/local/bin/ffprobe /usr/local/bin/ffprobe
+COPY --from=builder /usr/local/lib/ /usr/local/lib/
+
+COPY --from=builder /root/PiFmRds/src/pi_fm_rds /usr/bin/pi_fm_rds
+
+COPY --from=builder /root/iradio/django.sh /root/django.sh
+COPY --from=builder /root/iradio/supervisord.conf /etc/supervisord.conf
+
+
+
+
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

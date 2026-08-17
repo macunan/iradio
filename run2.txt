@@ -1,0 +1,7 @@
+sudo podman run -d \
+  --name iradio_service \
+  --network host \
+  --hostname iradio \
+  --device /dev/mem:/dev/mem \
+  --privileged \
+  iradio-local:1.0
