@@ -19,10 +19,13 @@ class RadioForm(ModelForm):
 class ConfigForm(ModelForm):
     class Meta:
         model=Config
-        fields=['id','frecuency','homelocation','dma_channel']
+        fields=['id','frecuency','homelocation','dma_channel','trans']
         widgets = {
             'frecuency': forms.TextInput(attrs={
             'class': 'frecuencytextbox'
+            }),
+            'trans': forms.TextInput(attrs={
+            'class': 'transtextbox'
             }),
             'homelocation': forms.TextInput(attrs={
             'class': 'homeloctextbox'}),

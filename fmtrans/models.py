@@ -80,6 +80,7 @@ class Config(models.Model):
     wavlocation = models.TextField(blank=True, null=True)
     dma_channel = models.TextField(blank=True, null=True)
     bandwidth = models.TextField(blank=True, null=True)
+    trans = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False

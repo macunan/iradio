@@ -61,16 +61,16 @@ def index(request):
 
 def light(request):
     if request.method == "POST":
-       D={'1':'/home/iradio/cron/mauri.sh',
-            '2':'/home/iradio/cron/dad.sh',
-            '3':'/home/iradio/cron/afuera.sh'}
+       D={'1':'sudo systemctl start mauri',
+            '2':'sudo systemctl start dad',
+            '3':'sudo systemctl start afuera'}
        command=D[request.POST["id"]]
        os.system(command)
     return render(request,'light.html')
 
 def cloud(request):
          ops=Server_Ops()
-         files=ops.run_fast_scandir('/srv/http/books')
+         files=ops.run_fast_scandir('/srv/nfs/books/')
          print(files)
          context={'files':files}
          return render(request,'cloud.html',context)

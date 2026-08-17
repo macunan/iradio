@@ -4,10 +4,10 @@ from .models import Radios, Config
 
 class Server_Ops:
     def stop(self):
-       os.system("systemctl stop iradio")
+       os.system("supervisorctl stop iradio")
 
     def restart(self):
-       os.system("systemctl restart iradio")
+       os.system("supervisorctl restart iradio")
 
     def writefile(self,id):
        id=int(id)
@@ -23,33 +23,63 @@ class Server_Ops:
        if len(radio_name)>64:
         radio_name=radio_name[0:64]
 
-       if url_type == "youtube":
-        end=" -bitexact  -acodec pcm_s16le -ar 22050 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
-        init="#!/bin/bash"
-        script="yt-dlp_linux_armv7l -o - "+url+" | ffmpeg -i - "+end
-        file = open(home_loc+"radio.sh", "w")
-        file.write(init+"\n")
-        file.write(script)
-        file.close()
-        return
+       if config.trans=="fm_transmitter":
+        if url_type == "youtube":
+         end=" -af 'highpass=f=30, lowpass=f=15000, compand=attacks=0.05:decays=0.2:points=-90/-90|-45/-14|-0/-4, volume=1.2'  -f wav -ac 2 -ar 22800 -  | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
+         init="#!/bin/bash"
+         script="python3 /root/iradio/stream_audio.py "+url+" | ffmpeg -i - "+end
+         file = open(home_loc+"radio.sh", "w")
+         file.write(init+"\n")
+         file.write(script)
+         file.close()
+         return
 
-       if url_type == "ffmpeg":
-        end=" -bitexact  -acodec pcm_s16le -ar 22050 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
-        init="#!/bin/bash"
-        script="ffmpeg -i "+url+end
-        file = open(home_loc+"radio.sh", "w")
-        file.write(init+"\n")
-        file.write(script)
-        file.close()
+        if url_type == "ffmpeg":
+         end=" -af 'highpass=f=30, lowpass=f=15000, compand=attacks=0.05:decays=0.2:points=-90/-90|-45/-14|-0/-4, volume=1.2'  -f wav -ac 2 -ar 22800 -  | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
+         init="#!/bin/sh"
+         script="ffmpeg  -i "+url+end
+         file = open(home_loc+"radio.sh", "w")
+         file.write(init+"\n")
+         file.write(script)
+         file.close()
+        else:
+         end=" -r 22800 -c 2 -b 16 -t wav -  | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
+         init="#!/bin/sh"
+         script="sox -t mp3 "+url+end
+         file = open(home_loc+"radio.sh", "w")
+         file.write(init+"\n")
+         file.write(script)
+         file.close()
+
        else:
-        end=" -bitexact  -acodec pcm_s16le -ar 22050 -ac 2 -f wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
-        init="#!/bin/bash"
-        end=" -r 22050 -c 2 -b 16 -t wav - | fm_transmitter -f  "+freq+" -d 3 -b "+bandwidth+" -"
-        script="sox -t mp3 "+url+end
-        file = open(home_loc+"radio.sh", "w")
-        file.write(init+"\n")
-        file.write(script)
-        file.close()
+        if url_type == "youtube":
+         end=" -af 'highpass=f=30, lowpass=f=15000, compand=attacks=0.05:decays=0.2:points=-90/-90|-45/-14|-0/-4, volume=1.2'  -f wav -ac 2 -ar 22800 -  | pi_fm_rds -freq  "+freq+" -audio -"
+         init="#!/bin/sh"
+         script="python3 /root/iradio/stream_audio.py "+url+" | ffmpeg -i - "+end
+         file = open(home_loc+"radio.sh", "w")
+         file.write(init+"\n")
+         file.write(script)
+         file.close()
+         return
+
+        if url_type == "ffmpeg":
+         end=" -af 'highpass=f=30, lowpass=f=15000, compand=attacks=0.05:decays=0.2:points=-90/-90|-45/-14|-0/-4, volume=1.2'  -f wav -ac 2 -ar 22800 - | pi_fm_rds -freq  "+freq+" -audio -"
+         init="#!/bin/sh"
+         script="ffmpeg  -i "+url+end
+         file = open(home_loc+"radio.sh", "w")
+         file.write(init+"\n")
+         file.write(script)
+         file.close()
+        else:
+         init="#!/bin/sh"
+         end=" -r 22800 -c 2 -b 16 -t wav - | pi_fm_rds -freq  "+freq+" -audio -"
+         script="sox -t mp3 "+url+end
+         file = open(home_loc+"radio.sh", "w")
+         file.write(init+"\n")
+         file.write(script)
+         file.close()
+
+
 
     def run_fast_scandir(self,dir):    # dir: str, ext: list
         s="";
@@ -59,13 +89,14 @@ class Server_Ops:
             s=files[i]
 # static/books/tarea1.png
 # /srv/http/books/ebooksclub.org__NetBeans_IDE_7_Cookbook.pdf""
-            files[i]=s.replace('/srv/http/','/static/')
+            # files[i]=s.replace('/srv/nfs/books/','/static/')
             i=i+1
         return(files)
 
     def urltype(self,url):
 
         if "youtube" in url:
+         url=url.replace("m.youtube","youtube")
          return "youtube"
 
         if "pls" in url:

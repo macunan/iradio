@@ -6,7 +6,7 @@ from .import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from .views import ajax_view
-from .api import api
+# from .api import api
 from django.contrib import admin
 
 
@@ -21,7 +21,7 @@ urlpatterns= [
         path('config', views.config),
         path('download', views.download_file),
         path('export', views.export),
-        path("api/",api.urls),
+# path("api/",api.urls),
         ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
