@@ -49,7 +49,7 @@ RUN ./configure \
     --enable-shared \
     --disable-doc \
     --disable-static && \
-    make -j16 && \
+    make -j2 && \
     make install
 
 WORKDIR /root
